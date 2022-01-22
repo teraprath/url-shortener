@@ -1,0 +1,42 @@
+{% include 'layouts/base.html' %}
+
+{% block content %}
+
+    <section>
+
+        <div class="form-container">
+            <div class="card">
+                <form method="post">
+                    <div class="input">
+                        <div class="icon"><i class="fas fa-link"></i></div>
+                        <input type="text" name="url" placeholder="Paste your link here" required>
+                    </div>
+                    <button type="submit" class="button">Shorten</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>URL</th>
+                        <th>Link ID</th>
+                    </tr>
+                    {% for url in urls %}
+                        <tr>
+                            <td>{{ url[1] }}</td>
+                            <td>{{ url[0] }}</td>
+                            <td class="td-buttons">
+                                <a href="{{ url_for('short', id=url[0]) }}" target="_blank"><i class="fas fa-copy"></i></a>
+                                <a href="{{ url_for('delete', id=url[0]) }}"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
